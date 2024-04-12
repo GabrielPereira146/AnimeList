@@ -32,7 +32,7 @@ export function RegisterUser() {
     return (
         <div className="size-full flex px-64 py-12">
             <div className='flex flex-row size-full bg-white/10 border-white/35 rounded-xl backdrop-blur-md'>
-                <div className='flex flex-col px-20 py-32 gap-32 bg-white/60 rounded-l-xl'>
+                <div className='flex flex-col h-full w-2/5 items-center  py-32 gap-32 bg-white/60 rounded-l-xl'>
                     <span className="text-4xl text-center">BEM VINDO</span>
                     <span
                         className="text-[40px] font-bold">

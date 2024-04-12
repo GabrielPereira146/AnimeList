@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: "Cinzel, sans-serif"
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

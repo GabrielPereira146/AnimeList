@@ -2,9 +2,10 @@ import { Calendar, LockIcon, MailIcon, User2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputWithValidations } from "./input-with-validation";
+import { InputWithValidations } from "../components/input-with-validation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import background from '../assets/backgorundRegister.png'
 
 const createUserFormSchema = z.object({
     username: z.string().min(3, "Username is required"),
@@ -26,7 +27,7 @@ const loginUserFormSchema = z.object({
 type createUserFormData = z.infer<typeof createUserFormSchema>
 type loginUserFormData = z.infer<typeof loginUserFormSchema>
 
-export function RegisterUser() {
+export function RegisterLoginUser() {
 
 
     const [isTransition, setIsTransition] = useState(true);
@@ -58,17 +59,17 @@ export function RegisterUser() {
     })
 
     function createUser(data: createUserFormData) {
-        console.log("AAA");
+        console.log(data);
     }
 
     function loginUser(data: loginUserFormData) {
-        console.log("AAA");
+        console.log(data);
     }
 
     useEffect(() => {
         const timeout = setTimeout(() => {
             setIsTransition(true);
-        }, 1500);
+        }, 1000);
 
         return () => clearTimeout(timeout);
     }, [isTransition]);
@@ -93,7 +94,7 @@ export function RegisterUser() {
     }
 
     return (
-        <div className="size-full flex px-64 py-12">
+        <div className="size-full flex px-64 py-12" >
             <div className='flex flex-row size-full bg-white/10 border-white/35 rounded-xl backdrop-blur-md'>
                 <motion.div className={`flex flex-col basis-1/3 items-center py-32 gap-32 bg-white/60 ${changeMode ? 'rounded-r-xl' : 'rounded-l-xl'}`}
                     initial={{ x: 0 }}
@@ -103,7 +104,7 @@ export function RegisterUser() {
                     <span className="text-4xl text-center">BEM VINDO</span>
                     <span
                         className="text-[40px] font-bold">
-                        <span className="underline decoration-[7.5px]">{spanText1}</span>{spanText2}
+                        <span className="underline decoration-[5px] underline-offset-8">{spanText1}</span>{spanText2}
                     </span>
                     <button onClick={toggleLoginMode} className='bg-white/60 rounded-full w-64 h-12 text-xl font-semibold shadow-xl'>
                         {isLoginMode ? "Registrar" : "Fazer Login"}

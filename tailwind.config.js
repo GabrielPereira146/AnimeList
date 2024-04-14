@@ -13,6 +13,7 @@ export default {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require("tailwind-gradient-mask-image"),
   ],
 }
 

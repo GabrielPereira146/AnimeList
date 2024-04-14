@@ -12,7 +12,7 @@ export default function Root() {
                     <img className='w-32 h-10' src={SloganLogo} />
                 </div>
                 <nav className="flex font-medium text-lg text-zinc-800 gap-8">
-                    <Link to={`/home`}>Home</Link>
+                    <Link to={`/`}>Home</Link>
                     <Link to={`/animes`}>Animes</Link>
                     <Link to={`/mangas`}>Mangas</Link>
                 </nav>

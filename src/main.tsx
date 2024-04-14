@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <Animes />,
       },
       {
-        path: "home/",
+        path: "",
         element: < Home/>,
       },
     ],

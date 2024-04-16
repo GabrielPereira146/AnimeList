@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { InputWithValidations } from "../components/input-with-validation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import background from '../assets/backgorundRegister.png'
 
 const createUserFormSchema = z.object({
     username: z.string().min(3, "Username is required"),

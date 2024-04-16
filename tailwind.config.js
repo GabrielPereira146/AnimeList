@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'selector',
+  
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -14,6 +16,7 @@ export default {
   plugins: [
     require('@tailwindcss/forms'),
     require("tailwind-gradient-mask-image"),
+    
   ],
 }
 

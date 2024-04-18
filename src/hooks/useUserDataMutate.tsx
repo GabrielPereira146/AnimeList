@@ -4,7 +4,7 @@ import { UserData } from "../interface/UserData";
 const API_URL = 'http://localhost:8080';
 
 const postData = async (data: UserData): AxiosPromise<any> => {
-    const response = axios.post(API_URL + '/user', data);
+    const response = axios.post(API_URL + '/auth/register', data);
     return response;
 }
 

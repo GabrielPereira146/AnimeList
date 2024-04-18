@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { InputWithValidations } from "../components/input-with-validation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useUserDataMutate } from "../hooks/useUserDataMutate";
 
 const createUserFormSchema = z.object({
     username: z.string().min(3, "Username is required"),
@@ -33,6 +34,7 @@ export function RegisterLoginUser() {
     const [isFocused, setIsFocused] = useState(false);
     const [isLoginMode, setIsLoginMode] = useState(false);
     const [changeMode, setChangeMode] = useState(false);
+    const {mutate} = useUserDataMutate();
 
 
 
@@ -58,7 +60,7 @@ export function RegisterLoginUser() {
     })
 
     function createUser(data: createUserFormData) {
-        console.log(data);
+        mutate(data);
     }
 
     function loginUser(data: loginUserFormData) {

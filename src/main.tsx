@@ -13,28 +13,31 @@ import Home from './routes/home';
 
 const router = createBrowserRouter([
   {
-    
+
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
 
       {
+        path: "",
+        element: <RegisterLoginUser />,
+      },
+      {
+        path: "home/",
+        element: < Home />,
+      },
+      {
         path: "animes/",
         element: <Animes />,
       },
-      {
-        path: "",
-        element: < Home/>,
-      },
+
+
     ],
   },
-  {
-    path: "/enter",
-    element: <RegisterLoginUser />,
-  },
 
-  
+
+
 
 ]);
 

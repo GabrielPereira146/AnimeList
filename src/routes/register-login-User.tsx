@@ -12,7 +12,8 @@ const createUserFormSchema = z.object({
     dateNasc: z.coerce.date(),
     email: z.string().email(),
     password: z.string().min(6, "Password is too short"),
-    confirm_password: z.string().min(6, "Confirm password is too short")
+    confirm_password: z.string().min(6, "Confirm password is too short"),
+    role: z.string().default("user"),
 })
     .refine(({ password, confirm_password }) => password === confirm_password, {
         message: "Password doesn't match",
@@ -134,6 +135,7 @@ export function RegisterLoginUser() {
                             <InputWithValidations type="email" placeholder="EMAIL" name="email" errors={errors} register={register} iconInput={MailIcon} />
                             <InputWithValidations type="password" placeholder="SENHA" name="password" errors={errors} register={register} iconInput={LockIcon} />
                             <InputWithValidations type="password" placeholder="CONFIRMAR SENHA" name="confirm_password" errors={errors} register={register} iconInput={LockIcon} />
+
                             <div className="flex items-center">
                                 <input type="checkbox" className="border-zinc-700/10 bg-white/35 rounded-sm focus:ring-transparent text-pink-800/60" name="Lembrar" id="lembre" />
                                 <label className="ms-2 text-base font-medium text-pink-900">Lembrar de mim</label>

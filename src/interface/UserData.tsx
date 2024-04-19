@@ -4,5 +4,6 @@ export interface UserData{
     dateNasc : Date,
     email: string,
     password: string,
+    role: string,
 
 }

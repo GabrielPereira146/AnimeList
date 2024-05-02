@@ -1,9 +1,6 @@
 export interface UserData{
-    id? : number,
     username : string,
-    dateNasc : Date,
+    date_birth : string,
     email: string,
     password: string,
-    role: string,
-
 }

@@ -8,6 +8,7 @@ export default function Home() {
     return (
         <div className="w-auto h-[1920px] bg-white dark:bg-zinc-900 ">
             {/* HERO */}
+            
             {data?.map(workData =>
                 <Hero
                     title={workData.title}

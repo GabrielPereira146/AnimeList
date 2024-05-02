@@ -6,14 +6,15 @@ import { InputWithValidations } from "../components/input-with-validation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useUserDataMutate } from "../hooks/useUserDataMutate";
+import { UserData } from "../interface/UserData";
+import moment from "moment";
 
 const createUserFormSchema = z.object({
     username: z.string().min(3, "Username is required"),
-    dateNasc: z.coerce.date(),
+    date_birth: z.string(),
     email: z.string().email(),
     password: z.string().min(6, "Password is too short"),
     confirm_password: z.string().min(6, "Confirm password is too short"),
-    role: z.string().default("user"),
 })
     .refine(({ password, confirm_password }) => password === confirm_password, {
         message: "Password doesn't match",
@@ -35,7 +36,7 @@ export function RegisterLoginUser() {
     const [isFocused, setIsFocused] = useState(false);
     const [isLoginMode, setIsLoginMode] = useState(false);
     const [changeMode, setChangeMode] = useState(false);
-    const {mutate} = useUserDataMutate();
+    const { mutate } = useUserDataMutate();
 
 
 
@@ -60,8 +61,17 @@ export function RegisterLoginUser() {
         resolver: zodResolver(loginUserFormSchema)
     })
 
-    function createUser(data: createUserFormData) {
-        mutate(data);
+    function createUser(form: createUserFormData) {
+        const dateString = form.date_birth;
+        const formattedDate = moment(dateString).format('YYYY-MM-DD');
+        const data: UserData = {
+            username: form.username,
+            date_birth: formattedDate,
+            email: form.email,
+            password: form.password
+        }
+        mutate(data)
+
     }
 
     function loginUser(data: loginUserFormData) {
@@ -82,7 +92,7 @@ export function RegisterLoginUser() {
                 setIsLoginMode(prevMode => !prevMode);
             }
         }, 400);
-    
+
         return () => clearTimeout(timeout);
     }, [isTransition]);
 
@@ -128,9 +138,9 @@ export function RegisterLoginUser() {
                             <span className="text-4xl font-medium text-center drop-shadow-lg">CADASTRE-SE</span>
                             <InputWithValidations type="text" placeholder="USERNAME" name="username" errors={errors} register={register} iconInput={User2} />
                             {isFocused ? (
-                                <InputWithValidations type="date" name="dateNasc" errors={errors} register={register} iconInput={Calendar} onFocus={handleFocus} onBlur={handleBlur} />
+                                <InputWithValidations type="date" name="date_birth" errors={errors} register={register} iconInput={Calendar} onFocus={handleFocus} onBlur={handleBlur} />
                             ) : (
-                                <InputWithValidations type="text" placeholder="DATA DE NASCIMENTO" name="dateNasc" errors={errors} register={register} iconInput={Calendar} onFocus={handleFocus} />
+                                <InputWithValidations type="text" placeholder="DATA DE NASCIMENTO" name="date_birth" errors={errors} register={register} iconInput={Calendar} onFocus={handleFocus} />
                             )}
                             <InputWithValidations type="email" placeholder="EMAIL" name="email" errors={errors} register={register} iconInput={MailIcon} />
                             <InputWithValidations type="password" placeholder="SENHA" name="password" errors={errors} register={register} iconInput={LockIcon} />

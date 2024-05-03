@@ -1,26 +1,40 @@
+import { useState, useEffect } from "react";
 import { Hero } from "../components/hero";
 import { useWorkData } from "../hooks/useWorkData";
-import { WorkData } from "../interface/WorkData";
 
-export default function Home() {
+export function Home() {
+
     const { data } = useWorkData();
 
-    return (
-        <div className="w-auto h-[1920px] bg-white dark:bg-zinc-900 ">
-            {/* HERO */}
-            
-            {data?.map(workData =>
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    if (data && data.length > 0) {
+
+        useEffect(() => {
+            const interval = setInterval(() => {
+                setCurrentIndex(prevIndex => (prevIndex + 1) % data.length);
+            }, 15000); // 15 segundos para mudar o hero
+
+            return () => clearInterval(interval);
+        }, [data.length]);
+
+        const workData = data[currentIndex];
+
+        return (
+            <div className="w-auto h-[1920px] bg-white">
+                {/* HERO */}
                 <Hero
                     title={workData.title}
-                    listGenres={workData.listGenres}
                     synopsis={workData.synopsis}
-                    average={workData.average}
+                    average={workData.averageGrade}
                     author={workData.author}
                     cover={workData.cover}
                     titleExibition={"Popular New Titles"}
-                />)}
-        </div>
+                />
+            </div>
+        );
+    } else {
+        // Trate o caso em que não há dados ou o índice está fora dos limites
+    }
 
-
-    );
 }

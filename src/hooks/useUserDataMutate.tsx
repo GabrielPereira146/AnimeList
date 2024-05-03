@@ -1,5 +1,5 @@
 import axios, {AxiosPromise } from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserData } from "../interface/UserData";
 const API_URL = 'http://localhost:8080';
 

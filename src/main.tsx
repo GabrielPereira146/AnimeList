@@ -9,7 +9,7 @@ import Root from "./routes/root";
 import ErrorPage from "./error-page";
 import Animes from "./routes/animes";
 import { RegisterLoginUser } from './routes/register-login-User';
-import Home from './routes/home';
+import {Home} from './routes/home';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <Animes />,
       },
       {
-        path: "home/",
+        path: "",
         element: < Home />,
       },
     ],

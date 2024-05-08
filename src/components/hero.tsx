@@ -1,24 +1,37 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Genre } from "./genre";
+import { useWorkData } from "../hooks/useWorkData";
+import { useState } from "react";
 
-interface HeroProps {
-    titleExibition: string;
-    title : string;
-    synopsis: string;
-    average: number;
-    author: string;
-    cover: string;
- }
 
-export function Hero({titleExibition,title,synopsis,average,author,cover}: HeroProps) {
 
-    return (
-        <div className="relative bg-no-repeat bg-cover bg-top z-0" style={{ backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url(${cover})` }}>
+export function Hero() {
+
+    const { data } = useWorkData("Best");
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+
+
+    function goToNextPage() {
+        if (data && currentIndex < data.length - 1)
+            setCurrentIndex(currentIndex + 1)
+    }
+
+    function goToPrevPage() {
+        if (currentIndex > 0)
+            setCurrentIndex(currentIndex - 1)
+    }
+
+    if (data && data.length > 0) {
+        const workData = data[(currentIndex % data.length)];
+        return (
+            <div className="relative bg-no-repeat bg-cover bg-top z-0" style={{ backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url(${workData.cover})` }}>
                 <div className="flex flex-col px-6 py-6 gap-2 bg-gradient-to-b from-black">
-                    <span className="text-2xl font-bold text-zinc-200 ">{titleExibition}</span>
+                    <span className="text-2xl font-bold text-zinc-200 ">Popular New Titles</span>
                     <div className="size-auto flex flex-row gap-3 py-5">
-                        <img className="w-56 h-80 rounded-lg" src={cover} alt="Anime Cover" />
+                        <img className="w-56 h-80 rounded-lg" src={workData.cover} alt="Anime Cover" />
                         <div className="size-full flex flex-col gap-4 px-3 ">
-                            <span className="text-4xl font-medium text-zinc-200 drop-shadow-sm">{title}</span>
+                            <span className="text-4xl font-medium text-zinc-200 drop-shadow-sm">{workData.title}</span>
                             <div className="flex flex-row gap-1">
                                 <Genre>Shounen</Genre>
                                 <Genre>Action</Genre>
@@ -26,14 +39,25 @@ export function Hero({titleExibition,title,synopsis,average,author,cover}: HeroP
                                 <Genre>Martial Arts</Genre>
                             </div>
                             <div className="h-36 max-w-max">
-                                <span className=" h-36 text-lg text-zinc-200 font-semibold line-clamp-6 drop-shadow-2xl">{synopsis}</span>
+                                <span className=" h-36 text-lg text-zinc-200 font-semibold line-clamp-6 drop-shadow-2xl">{workData.synopsis}</span>
                             </div>
-                            <span className="text-2xl font-semibold text-zinc-800 ">Nota: {average}</span>
-                            <span className="text-base font-bold text-zinc-800 ">{author}</span>
+                            <span className="text-2xl font-semibold text-zinc-800 ">Nota: {workData.averageGrade}</span>
+                            <span className="text-base font-bold text-zinc-800 ">{workData.author}</span>
                         </div>
                     </div>
-                    
+                    <div className="flex flex-row self-end gap-2">
+                        <button onClick={goToPrevPage} className="bg-black/5 border border-black size-8 rounded-full flex items-center justify-center"> <ChevronLeft className="size-8 text-black" /></button>
+                        <button onClick={goToNextPage} className="bg-black/5 border border-black size-8 rounded-full flex items-center justify-center"> <ChevronRight className="size-8 text-black" /></button>
+                    </div>
                 </div>
             </div>
-    )
+        )
+    } else {
+        return (
+            <div className="w-auto h-[1920px] bg-white">
+                {/* Exibição de mensagem de erro ou fallback */}
+                <p>No data available.</p>
+            </div>
+        );
+    }
 }

@@ -1,40 +1,40 @@
-import { useState, useEffect } from "react";
 import { Hero } from "../components/hero";
-import { useWorkData } from "../hooks/useWorkData";
 
 export function Home() {
 
-    const { data } = useWorkData();
+    const getSeason = () => {
+        const now = new Date();
+        const month = now.getMonth() + 1; // Adiciona 1 porque o mês é indexado a partir de 0
+        if (month >= 3 && month <= 5) {
+            return "Spring";
+        } else if (month >= 6 && month <= 8) {
+            return "Summer";
+        } else if (month >= 9 && month <= 11) {
+            return "Autumn";
+        } else {
+            return "Winter";
+        }
+    };
 
-    const [currentIndex, setCurrentIndex] = useState(0);
+    // Obtém o ano atual
+    const currentYear = new Date().getFullYear();
 
-    if (data && data.length > 0) {
+    const AnimeSeason = `${getSeason()} ${currentYear} ANIME`
+    const MangaSeason = `${getSeason()} ${currentYear} MANGA`
 
-        useEffect(() => {
-            const interval = setInterval(() => {
-                setCurrentIndex(prevIndex => (prevIndex + 1) % data.length);
-            }, 15000); // 15 segundos para mudar o hero
 
-            return () => clearInterval(interval);
-        }, [data.length]);
 
-        const workData = data[currentIndex];
-
+  
         return (
             <div className="w-auto h-[1920px] bg-white">
                 {/* HERO */}
-                <Hero
-                    title={workData.title}
-                    synopsis={workData.synopsis}
-                    average={workData.averageGrade}
-                    author={workData.author}
-                    cover={workData.cover}
-                    titleExibition={"Popular New Titles"}
-                />
+                <Hero/>
+                <div className="flex flex-col px-6 py-10 gap-4">
+                    <span className="font-bold text-xl"> {AnimeSeason}</span>
+                    <span className="font-bold text-xl"> {MangaSeason}</span>
+                </div>
             </div>
         );
-    } else {
-        // Trate o caso em que não há dados ou o índice está fora dos limites
-    }
+    
 
 }

@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Genre } from "./genre";
 import { useWorkData } from "../hooks/useWorkData";
-import { useState } from "react";
+import {useState } from "react";
 
 
 
@@ -15,11 +15,15 @@ export function Hero() {
     function goToNextPage() {
         if (data && currentIndex < data.length - 1)
             setCurrentIndex(currentIndex + 1)
+        else
+            setCurrentIndex(0)
     }
 
     function goToPrevPage() {
         if (currentIndex > 0)
             setCurrentIndex(currentIndex - 1)
+        else if (data)
+            setCurrentIndex(data.length - 1)
     }
 
     if (data && data.length > 0) {
@@ -33,7 +37,7 @@ export function Hero() {
                         <div className="size-full flex flex-col gap-4 px-3 ">
                             <span className="text-4xl font-medium text-zinc-200 drop-shadow-sm">{workData.title}</span>
                             <div className="flex flex-row gap-1">
-                                <Genre>Shounen</Genre>
+                                <Genre>{workData.status}</Genre>
                                 <Genre>Action</Genre>
                                 <Genre>Historical</Genre>
                                 <Genre>Martial Arts</Genre>
@@ -45,9 +49,13 @@ export function Hero() {
                             <span className="text-base font-bold text-zinc-800 ">{workData.author}</span>
                         </div>
                     </div>
-                    <div className="flex flex-row self-end gap-2">
-                        <button onClick={goToPrevPage} className="bg-black/5 border border-black size-8 rounded-full flex items-center justify-center"> <ChevronLeft className="size-8 text-black" /></button>
-                        <button onClick={goToNextPage} className="bg-black/5 border border-black size-8 rounded-full flex items-center justify-center"> <ChevronRight className="size-8 text-black" /></button>
+                    <div className="flex flex-row self-end gap-4">
+                        <button onClick={goToPrevPage} className="bg-transparent hover:bg-pink-800/35 size-10 rounded-full flex items-center justify-center">
+                            <ChevronLeft className="size-8 text-black" style={{ marginLeft: "-3px" }} />
+                        </button>
+                        <button onClick={goToNextPage} className="bg-transparent hover:bg-pink-800/35 size-10 rounded-full flex items-center justify-center">
+                            <ChevronRight className="size-8 text-black" style={{ marginRight: "-3px" }} />
+                        </button>
                     </div>
                 </div>
             </div>

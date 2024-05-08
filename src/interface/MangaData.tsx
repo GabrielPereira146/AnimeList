@@ -1,4 +1,4 @@
-export interface WorkData{
+export interface MangaData{
     title : string,
     cover: string,
     synopsis: string,
@@ -6,4 +6,5 @@ export interface WorkData{
     author: string,
     worktype: string,
     status: string,
+    volumes: number,
 }

@@ -13,10 +13,6 @@ const fetchTopWorks = async (): AxiosPromise<WorkData[]> => {
     return response;
 }
 
-const fetchSeasonAnime = async (): AxiosPromise<WorkData[]> => {
-    const response = axios.get(API_URL + '/animes/season');
-    return response;
-}
 
 export function useWorkData(type: string) {
 
@@ -28,9 +24,6 @@ export function useWorkData(type: string) {
             break;
         case "All":
             fetchFn = fetchAllWorks;
-            break;
-        case "AnimeSeason":
-            fetchFn = fetchSeasonAnime;
             break;
     }
 

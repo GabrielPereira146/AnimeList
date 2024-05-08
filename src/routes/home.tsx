@@ -1,4 +1,9 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Hero } from "../components/hero";
+import { useAnimeData } from "../hooks/useAnimeData";
+import { useRef } from "react";
+import { OverflowScroll } from "../components/overflow-scroll";
+
 
 export function Home() {
 
@@ -23,18 +28,18 @@ export function Home() {
     const MangaSeason = `${getSeason()} ${currentYear} MANGA`
 
 
-
-  
-        return (
-            <div className="w-auto h-[1920px] bg-white">
-                {/* HERO */}
-                <Hero/>
-                <div className="flex flex-col px-6 py-10 gap-4">
-                    <span className="font-bold text-xl"> {AnimeSeason}</span>
-                    <span className="font-bold text-xl"> {MangaSeason}</span>
-                </div>
+    return (
+        <div className="w-auto h-full bg-white">
+            {/* HERO */}
+            <Hero />
+            <div className="flex flex-col px-6 py-10 gap-6">
+                <span className="font-bold text-xl"> {AnimeSeason}</span>
+                <OverflowScroll workType="ANIME" search={"AnimeSeason"}/>
+                <span className="font-bold text-xl"> {MangaSeason}</span>
+                <OverflowScroll workType="MANGA" search={"MangaSeason"}/>
             </div>
-        );
-    
+        </div>
+    );
+
 
 }

@@ -7,10 +7,11 @@ import {
 import './index.css'
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
-import Animes from "./routes/animes";
 import { RegisterLoginUser } from './routes/register-login-User';
-import {Home} from './routes/home';
+import { Home } from './routes/home';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Mangas } from './routes/mangas';
+import { Animes } from './routes/animes';
 
 const queryClient = new QueryClient();
 
@@ -24,11 +25,15 @@ const router = createBrowserRouter([
 
       {
         path: "animes/",
-        element: <Animes />,
+        element: <Animes/>,
+      },
+      {
+        path: "mangas/",
+        element: <Mangas/>,
       },
       {
         path: "",
-        element: < Home />,
+        element: <Home/>,
       },
     ],
   },

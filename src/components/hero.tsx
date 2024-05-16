@@ -2,12 +2,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Genre } from "./genre";
 import { useWorkData } from "../hooks/useWorkData";
 import {useState } from "react";
+import { useAnimeData } from "../hooks/useAnimeData";
+import { useMangaData } from "../hooks/useMangaData";
+
+interface HeroProps {
+    workType: string;
+
+}
 
 
+export function Hero({ workType}: HeroProps) {
 
-export function Hero() {
-
-    const { data } = useWorkData("Best");
+    const { data } = workType === "ANIME" ? useAnimeData("Popular") : workType === "MANGA" ? useMangaData("Popular") : useWorkData("Best");
     const [currentIndex, setCurrentIndex] = useState(0);
 
 

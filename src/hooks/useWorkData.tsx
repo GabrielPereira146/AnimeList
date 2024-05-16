@@ -9,7 +9,7 @@ const fetchAllWorks = async (): AxiosPromise<WorkData[]> => {
 }
 
 const fetchTopWorks = async (): AxiosPromise<WorkData[]> => {
-    const response = axios.get(API_URL + '/works/bestWorks');
+    const response = axios.get(API_URL + '/works/popularWorks');
     return response;
 }
 
@@ -29,7 +29,7 @@ export function useWorkData(type: string) {
 
     const query = useQuery({
         queryFn: fetchFn,
-        queryKey: ['work-data'],
+        queryKey: ['work-data',type],
         retry: 2
     })
 

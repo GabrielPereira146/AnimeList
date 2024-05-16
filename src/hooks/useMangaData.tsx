@@ -8,8 +8,13 @@ const fetchAllMangas = async (): AxiosPromise<MangaData[]> => {
     return response;
 }
 
+const fetchPopularMangas = async (): AxiosPromise<MangaData[]> => {
+    const response = axios.get(API_URL + '/popular');
+    return response;
+}
+
 const fetchTopMangas = async (): AxiosPromise<MangaData[]> => {
-    const response = axios.get(API_URL + '/best');
+    const response = axios.get(API_URL + '/top');
     return response;
 }
 
@@ -23,8 +28,11 @@ export function useMangaData(type: string) {
     let fetchFn: () => AxiosPromise<MangaData[]> = fetchAllMangas;
 
     switch (type) {
-        case "Best":
+        case "Top":
             fetchFn = fetchTopMangas;
+            break;
+        case "Popular":
+            fetchFn = fetchPopularMangas;
             break;
         case "All":
             fetchFn = fetchAllMangas;
@@ -36,7 +44,7 @@ export function useMangaData(type: string) {
 
     const query = useQuery({
         queryFn: fetchFn,
-        queryKey: ['manga-data'],
+        queryKey: ['manga-data', type],
         retry: 2
     })
 

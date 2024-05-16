@@ -8,8 +8,8 @@ const fetchAllAnimes = async (): AxiosPromise<AnimeData[]> => {
     return response;
 }
 
-const fetchTopAnimes = async (): AxiosPromise<AnimeData[]> => {
-    const response = axios.get(API_URL + '/best');
+const fetchPopularAnimes = async (): AxiosPromise<AnimeData[]> => {
+    const response = axios.get(API_URL + '/popular');
     return response;
 }
 
@@ -18,13 +18,22 @@ const fetchSeasonAnime = async (): AxiosPromise<AnimeData[]> => {
     return response;
 }
 
+const fetchTopAnime = async (): AxiosPromise<AnimeData[]> => {
+    const response = axios.get(API_URL + '/top');
+    return response;
+}
+
+
 export function useAnimeData(type: string) {
 
     let fetchFn: () => AxiosPromise<AnimeData[]> = fetchAllAnimes;
 
     switch (type) {
-        case "Best":
-            fetchFn = fetchTopAnimes;
+        case "Popular":
+            fetchFn = fetchPopularAnimes;
+            break;
+        case "Top":
+            fetchFn = fetchTopAnime;
             break;
         case "All":
             fetchFn = fetchAllAnimes;
@@ -36,7 +45,7 @@ export function useAnimeData(type: string) {
 
     const query = useQuery({
         queryFn: fetchFn,
-        queryKey: ['anime-data'],
+        queryKey: ['anime-data',type],
         retry: 2
     })
 

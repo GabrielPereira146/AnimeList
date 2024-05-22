@@ -11,10 +11,13 @@ export function Header() {
                 <img className='size-14' src={IconLogo} />
                 <img className='w-32 h-10' src={SloganLogo} />
             </div>
-            <nav className="flex font-medium text-lg text-zinc-800 gap-8">
+            <nav className="flex font-medium text-lg items-center text-zinc-800 gap-8">
                 <Link to={`/`}>Home</Link>
                 <Link to={`/animes`}>Animes</Link>
                 <Link to={`/mangas`}>Mangas</Link>
+            </nav>
+            <nav className='ml-auto'>
+                <Link className='text-sm font-medium items-center text-zinc-800' to={`/auth`}>Register/Login</Link>
             </nav>
         </div>
     )

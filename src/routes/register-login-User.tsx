@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useUserDataMutate } from "../hooks/useUserDataMutate";
 import { UserData } from "../interface/UserData";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const createUserFormSchema = z.object({
     username: z.string().min(3, "Username is required"),
@@ -62,6 +63,7 @@ export function RegisterLoginUser() {
     })
 
     function createUser(form: createUserFormData) {
+        const navigate = useNavigate();
         const dateString = form.date_birth;
         const formattedDate = moment(dateString).format('YYYY-MM-DD');
         const data: UserData = {
@@ -70,7 +72,12 @@ export function RegisterLoginUser() {
             email: form.email,
             password: form.password
         }
-        mutate(data)
+        mutate(data, {
+            onSuccess: () => {
+                navigate('/'); 
+            }
+        });
+
 
     }
 

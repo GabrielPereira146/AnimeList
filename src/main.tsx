@@ -12,6 +12,7 @@ import { Home } from './routes/home';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Mangas } from './routes/mangas';
 import { Animes } from './routes/animes';
+import { SpecificWork } from './routes/specific-work';
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <RegisterLoginUser />,
+  },
+
+  {
+    path: "/work",
+    element: <SpecificWork/>,
   },
 
 

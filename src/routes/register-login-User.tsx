@@ -74,7 +74,7 @@ export function RegisterLoginUser() {
         }
         mutate(data, {
             onSuccess: () => {
-                navigate('/'); 
+                navigate('/');
             }
         });
 

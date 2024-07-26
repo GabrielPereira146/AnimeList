@@ -1,10 +1,17 @@
-export interface AnimeData{
-    title : string,
-    cover: string,
-    synopsis: string,
-    averageGrade: number,
-    author: string,
-    worktype: string,
-    status: string,
-    episodes: number,
+export interface AnimeData {
+  id: string;
+  attributes: {
+      synopsis: string;
+      titles: {
+          en: string;
+          en_jp: string;
+      };
+      averageRating: string;
+      status: string;
+      canonicalTitle: string;
+      posterImage: {
+          original: string;
+      };
+      startDate: string;
+  };
 }

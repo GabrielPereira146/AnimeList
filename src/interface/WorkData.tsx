@@ -1,9 +1,12 @@
-export interface WorkData{
-    title : string,
-    cover: string,
-    synopsis: string,
-    averageGrade: number,
-    author: string,
-    worktype: string,
-    status: string,
-}
+export interface WorkData {
+    id: string;
+    attributes: {
+      canonicalTitle: string;
+      posterImage: {
+        original: string;
+      };
+      averageRating: string;
+      synopsis: string;
+    };
+  }
+  

@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Genre } from "./genre";
 import { useWorkData } from "../hooks/useWorkData";
-import {useState } from "react";
+import { useState } from "react";
 import { useAnimeData } from "../hooks/useAnimeData";
 import { useMangaData } from "../hooks/useMangaData";
 
@@ -10,12 +10,12 @@ interface HeroProps {
 
 }
 
-
-export function Hero({ workType}: HeroProps) {
+export function Hero({ workType }: HeroProps) {
 
     const { data } = workType === "ANIME" ? useAnimeData("Popular") : workType === "MANGA" ? useMangaData("Popular") : useWorkData("Best");
+    //const { data } = useAnimeData("All");
     const [currentIndex, setCurrentIndex] = useState(0);
-
+    console.log(data);
 
 
     function goToNextPage() {
@@ -32,27 +32,30 @@ export function Hero({ workType}: HeroProps) {
             setCurrentIndex(data.length - 1)
     }
 
-    if (data && data.length > 0) {
+    if (data) {
         const workData = data[(currentIndex % data.length)];
         return (
-            <div className="relative bg-no-repeat bg-cover bg-top z-0" style={{ backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url(${workData.cover})` }}>
+            <div className="relative bg-no-repeat bg-cover bg-top z-0" style={{ backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)), url(${workData.attributes.posterImage.original})` }}>
                 <div className="flex flex-col px-6 py-6 gap-2 bg-gradient-to-b from-black">
                     <span className="text-2xl font-bold text-zinc-200 ">Popular New Titles</span>
                     <div className="size-auto flex flex-row gap-3 py-5">
-                        <img className="w-56 h-80 rounded-lg" src={workData.cover} alt="Anime Cover" />
+                        <img className="w-56 h-80 rounded-lg" src={workData.attributes.posterImage.original} alt="Anime Cover" />
                         <div className="size-full flex flex-col gap-4 px-3 ">
-                            <span className="text-4xl font-medium text-zinc-200 drop-shadow-sm">{workData.title}</span>
+                            <div>
+                                <span className="text-4xl font-medium text-zinc-200 drop-shadow-sm">{workData.attributes.titles.en}</span>
+                                <h1 className="text-zinc-200 drop-shadow-sm">{workData.attributes.titles.en_jp}</h1>
+                            </div>
                             <div className="flex flex-row gap-1">
-                                <Genre>{workData.status}</Genre>
+                                <Genre>{workData.attributes.status}</Genre>
                                 <Genre>Action</Genre>
                                 <Genre>Historical</Genre>
                                 <Genre>Martial Arts</Genre>
                             </div>
                             <div className="h-36 max-w-max">
-                                <span className=" h-36 text-lg text-zinc-200 font-semibold line-clamp-6 drop-shadow-2xl">{workData.synopsis}</span>
+                                <span className=" h-36 text-lg text-zinc-200 font-semibold line-clamp-6 drop-shadow-2xl">{workData.attributes.synopsis}</span>
                             </div>
-                            <span className="text-2xl font-semibold text-zinc-800 ">Nota: {workData.averageGrade}</span>
-                            <span className="text-base font-bold text-zinc-800 ">{workData.author}</span>
+                            <span className="text-2xl font-semibold text-zinc-800 ">Grade: {workData.attributes.averageRating}</span>
+                            <span className="text-base font-bold text-zinc-800 ">{ }</span>
                         </div>
                     </div>
                     <div className="flex flex-row self-end gap-4">

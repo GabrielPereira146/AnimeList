@@ -28,12 +28,12 @@ export function Animes() {
         <div className="w-auto h-full bg-white">
             {/* HERO */}
             <Hero workType={"ANIME"}/>
-            <div className="flex flex-col px-6 py-10 gap-6">
-                <span className="font-bold text-xl"> {AnimeSeason}</span>
+             <div className="flex flex-col py-10 gap-6">
+                <span className="px-6 font-bold text-xl"> {AnimeSeason}</span>
                 <OverflowScroll workType="ANIME" search={"AnimeSeason"}/>
-                <span className="font-bold text-xl">TOP ANIMES</span>
+                <span className="px-6 font-bold text-xl">TOP ANIMES</span>
                 <OverflowScroll workType="ANIME" search={"Top"}/>
-            </div>
+            </div> 
         </div>
     );
 

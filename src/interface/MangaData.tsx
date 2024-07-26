@@ -1,10 +1,17 @@
-export interface MangaData{
-    title : string,
-    cover: string,
-    synopsis: string,
-    averageGrade: number,
-    author: string,
-    worktype: string,
-    status: string,
-    volumes: number,
+export interface MangaData {
+  id: string;
+  attributes: {
+      synopsis: string;
+      titles: {
+          en: string;
+          en_jp: string;
+      };
+      averageRating: string;
+      status: string;
+      canonicalTitle: string;
+      posterImage: {
+          original: string;
+      };
+      startDate: string;
+  };
 }

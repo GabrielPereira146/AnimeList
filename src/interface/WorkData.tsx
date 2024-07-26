@@ -1,12 +1,21 @@
 export interface WorkData {
-    id: string;
-    attributes: {
-      canonicalTitle: string;
-      posterImage: {
-        original: string;
+  id: string;
+  attributes: {
+      synopsis: string;
+      titles: {
+          en: string;
+          en_jp: string;
       };
       averageRating: string;
-      synopsis: string;
-    };
-  }
-  
+      status: string;
+      canonicalTitle: string;
+      posterImage: {
+          original: string;
+      };
+      coverImage:{
+         original: string;
+      };
+      userCount: number;
+      startDate: string;
+  };
+}

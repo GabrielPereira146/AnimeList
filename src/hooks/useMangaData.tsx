@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchAllMangas, fetchPopularMangas, fetchSeasonMangas, fetchTopMangas } from "../services/mangaService";
+import { fetchAllMangas, fetchPopularMangas, fetchRecentMangas, fetchTopMangas } from "../services/mangaService";
 import { MangaData } from "../interface/MangaData";
 
 export function useMangaData(type: string) {
@@ -16,8 +16,8 @@ export function useMangaData(type: string) {
         case "All":
             fetchFn = fetchAllMangas;
             break;
-        case "Mangaeason":
-            fetchFn = fetchSeasonMangas;
+        case "Recent":
+            fetchFn = fetchRecentMangas;
             break;
     }
 

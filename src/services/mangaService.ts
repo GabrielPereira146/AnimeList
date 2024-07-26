@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, AxiosResponse } from "axios";
+import axios from "axios";
 import { MangaData } from "../interface/MangaData";
 
 const KITSU_BASE_URL = 'https://kitsu.io/api/edge/manga';
@@ -16,7 +16,7 @@ const fetchAllMangas = async (): Promise<MangaData[]> => {
 const fetchPopularMangas = async (): Promise<MangaData[]> => {
   const response = await axios.get(KITSU_BASE_URL, {
     params: {
-      'sort': '-userCount',
+      'sort':'popularityRank',
       'page[limit]': 7,
       'page[offset]': 0
     }
@@ -24,11 +24,10 @@ const fetchPopularMangas = async (): Promise<MangaData[]> => {
   return response.data.data;
 };
 
-const fetchSeasonMangas = async (): Promise<MangaData[]> => {
+const fetchRecentMangas = async (): Promise<MangaData[]> => {
   const response = await axios.get(KITSU_BASE_URL, {
     params: {
-      'filter[seasonYear]': new Date().getFullYear(),
-      'filter[season]': 'summer', // Ajuste para a estação atual
+      'sort': '-updatedAt',
       'page[limit]': 20, // Ajuste conforme necessário
       'page[offset]': 0
     }
@@ -49,4 +48,4 @@ const fetchTopMangas = async (): Promise<MangaData[]> => {
 
 
 
-export { fetchAllMangas, fetchPopularMangas, fetchSeasonMangas, fetchTopMangas};
+export { fetchAllMangas, fetchPopularMangas, fetchRecentMangas, fetchTopMangas};

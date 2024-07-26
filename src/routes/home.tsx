@@ -20,9 +20,7 @@ export function Home() {
 
     // Obtém o ano atual
     const currentYear = new Date().getFullYear();
-
     const AnimeSeason = `${getSeason()} ${currentYear} ANIME`
-    const MangaSeason = `${getSeason()} ${currentYear} MANGA`
 
 
     return (
@@ -32,8 +30,8 @@ export function Home() {
             <div className="flex flex-col px-6 py-10 gap-6">
                 <span className="font-bold text-xl"> {AnimeSeason}</span>
                 <OverflowScroll workType="ANIME" search={"AnimeSeason"}/>
-                <span className="font-bold text-xl"> {MangaSeason}</span>
-                <OverflowScroll workType="MANGA" search={"MangaSeason"}/>
+                <span className="font-bold text-xl"> MANGA Lasted Updates </span>
+                <OverflowScroll workType="MANGA" search={"Recent"}/>
             </div>
         </div>
     );

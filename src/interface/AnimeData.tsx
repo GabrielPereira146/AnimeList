@@ -12,6 +12,10 @@ export interface AnimeData {
       posterImage: {
           original: string;
       };
+      coverImage:{
+         original: string;
+      };
+      userCount: number;
       startDate: string;
   };
 }

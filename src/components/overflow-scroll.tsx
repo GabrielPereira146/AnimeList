@@ -13,7 +13,10 @@ export function OverflowScroll({ workType, search }: OverflowScrollProps) {
 
     const containerRef = useRef(null);
 
-    const { data } = workType === "ANIME" ? useAnimeData(search) : useMangaData(search);
+    const animeData = useAnimeData(search);
+    const mangaData = useMangaData(search);
+
+    const data = workType === "ANIME" ? animeData.data : mangaData.data;
 
     const scrollLeft = () => {
         containerRef.current.scrollBy({
@@ -47,6 +50,7 @@ return (
                             <p className="text-sm mt-2 line-clamp-6">{animeData.attributes.synopsis}</p>
                             <p className="text-sm mt-2 justify-self-end">Status: {animeData.attributes.status}</p>
                             <p className="text-sm mt-2 justify-self-end">Rating: {animeData.attributes.averageRating}</p>
+                            <p className="text-sm mt-2">{animeData.attributes.userCount.toLocaleString()} Reviews</p> 
                         </div>
                     </div>
                 </div>

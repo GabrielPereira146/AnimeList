@@ -1,5 +1,5 @@
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { AnimeData } from "../interface/AnimeData";
+import axios from "axios";
+import { AnimeData} from "../interface/AnimeData";
 
 const KITSU_BASE_URL = 'https://kitsu.io/api/edge/anime';
 
@@ -14,16 +14,16 @@ const fetchAllAnimes = async (): Promise<AnimeData[]> => {
 };
 
 const fetchPopularAnimes = async (): Promise<AnimeData[]> => {
-  const currentYear = new Date().getFullYear();
   const response = await axios.get(KITSU_BASE_URL, {
     params: {
-      'filter[seasonYear]': currentYear,
-      'sort': '-averageRating', // Classificar por maior nota
+      'sort': 'popularityRank', 
       'page[limit]': 7, // Limite de resultados
       'page[offset]': 0
     }
   });
+  
   return response.data.data;
+  
 };
 
 const fetchSeasonAnime = async (): Promise<AnimeData[]> => {
@@ -48,7 +48,5 @@ const fetchTopAnime = async (): Promise<AnimeData[]> => {
   });
   return response.data.data;
 };
-
-
 
 export { fetchAllAnimes, fetchPopularAnimes, fetchSeasonAnime, fetchTopAnime };

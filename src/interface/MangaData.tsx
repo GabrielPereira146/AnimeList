@@ -12,6 +12,10 @@ export interface MangaData {
       posterImage: {
           original: string;
       };
+      coverImage:{
+          original: string;
+      };
+      userCount: number;
       startDate: string;
   };
 }
